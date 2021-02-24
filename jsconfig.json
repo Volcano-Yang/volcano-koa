@@ -1,8 +1,15 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./",
-      "paths": {
-        "@/*": ["*"]
-      }
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@models/*": ["./app/models/*"],
+      "@api/*": ["./app/api/*"],
+      "@api/v1/*": ["./app/api/v1/*"],
+      "@core/*": ["./core/*"],
+      "@config/*": ["./config/*"],
+      "@static/*": ["./static/*"],
+      "@validator/*": ["./app/validators/*"],
+      "@middlewares/*": ["./middlewares/*"]
     }
   }
+}
