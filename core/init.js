@@ -1,6 +1,7 @@
 const requireDirectory = require("require-directory");
 const Router = require("koa-router");
 const staticServer = require("koa-static");
+const catchError = require("../middlewares/errorHander");
 const path = require("path");
 
 class InitManager {
@@ -9,14 +10,19 @@ class InitManager {
    */
   static initCore(app) {
     InitManager.app = app;
+    InitManager.initErrorHander();
     InitManager.loadConfig();
     InitManager.initLoadRouters();
     InitManager.loadHttpException();
     InitManager.initStaticServer();
   }
 
+  static initErrorHander() {
+    InitManager.app.use(catchError);
+  }
+
   static loadConfig() {
-    const config = require("@configjs");
+    const config = require("@config/config.js");
     global.config = config;
   }
 
@@ -39,8 +45,8 @@ class InitManager {
   }
 
   static loadHttpException() {
-    // const errors = require('./http-exception')
-    // global.errs = errors
+    const errors = require("@core/http-exception");
+    global.errs = errors;
   }
 }
 

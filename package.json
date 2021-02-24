@@ -29,10 +29,12 @@
   "_moduleAliases": {
     "@root": ".",
     "@models": "./app/models",
+    "@api": "./app/api",
     "@api/v1": "./app/api/v1",
-    "@core": "./core/",
-    "@configjs": "./config.js",
-    "@static": "./static/",
-    "@validator": "app/validators/validator.js"
+    "@core": "./core",
+    "@config": "./config",
+    "@static": "./static",
+    "@validator": "./app/validators",
+    "@middlewares": "./middlewares"
   }
 }
