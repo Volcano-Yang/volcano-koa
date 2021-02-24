@@ -28,7 +28,11 @@
   },
   "_moduleAliases": {
     "@root": ".",
-    "@models": "app/models",
+    "@models": "./app/models",
+    "@api/v1": "./app/api/v1",
+    "@core": "./core/",
+    "@configjs": "./config.js",
+    "@static": "./static/",
     "@validator": "app/validators/validator.js"
   }
 }

@@ -1,5 +1,5 @@
 const Router = require("koa-router");
-const { User } = require("../model/user");
+const { User } = require("@models/user");
 const router = new Router();
 
 router.get("/api1", async (ctx, next) => {

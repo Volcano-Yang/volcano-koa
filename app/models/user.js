@@ -1,6 +1,6 @@
 const { Sequelize, Model } = require("sequelize");
 
-const { db } = require("../core/db");
+const { db } = require("@core/db");
 
 class User extends Model {}
 
