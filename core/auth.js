@@ -1,10 +1,9 @@
-const basicAuth = require("basic-auth");
 const jwt = require("jsonwebtoken");
 
 class Auth {
     constructor(level) {
         // 实例属性
-        this.level = level || 1;
+        this.level = level || 8;
     }
     // 类静态属性
     static USER = 8;
@@ -37,19 +36,22 @@ class Auth {
         }
     }
 
-    get m() {
+    get verifyScope() {
         return async (ctx, next) => {
-            const userToken = basicAuth(ctx.req);
-            let errMsg = "token不合法";
+            const userToken = ctx.request.header.authorization;
+            console.log("auth.js userToken", userToken);
+            let errMsg = "token缺失";
+            let decode;
 
-            if (!userToken || !userToken.name) {
+            if (!userToken) {
                 throw new global.errs.Forbbiden(errMsg);
             }
             try {
-                var decode = jwt.verify(
-                    userToken.name,
+                decode = jwt.verify(
+                    userToken,
                     global.config.security.secretKey
                 );
+                console.log("auth.js decode", decode);
             } catch (error) {
                 if (error.name == "TokenExpiredError") {
                     errMsg = "token已过期";
@@ -61,12 +63,6 @@ class Auth {
                 errMsg = "权限不足";
                 throw new global.errs.Forbbiden(errMsg);
             }
-
-            // uid,scope
-            ctx.auth = {
-                uid: decode.uid,
-                scope: decode.scope,
-            };
 
             await next();
         };
