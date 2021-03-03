@@ -11,6 +11,7 @@ class Auth {
     static ADMIN = 16;
     static SUPER_ADMIN = 32;
 
+    // scope 是登录角色权限等级
     static generateToken(uid, scope) {
         const secretKey = global.config.security.secretKey;
         const expiresIn = global.config.security.expiresIn;

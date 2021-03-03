@@ -1,6 +1,10 @@
 const bcrypt = require("bcryptjs");
 const Router = require("koa-router");
-const { RegisterValidator, LoginValidator } = require("@validator/validator");
+const {
+    RegisterValidator,
+    LoginValidator,
+    NotEmptyValidator,
+} = require("@validator/validator");
 const { User } = require("@models/user");
 const { Auth } = require("@core/auth");
 
@@ -56,6 +60,14 @@ router.post("/login", async (ctx) => {
         msg: "登录成功",
         code: 200,
         token,
+    };
+});
+
+router.post("/verify", async (ctx) => {
+    const v = await new NotEmptyValidator().validate(ctx);
+    const result = Auth.verifyToken(v.get("body.token"));
+    ctx.body = {
+        isValid: result,
     };
 });
 
