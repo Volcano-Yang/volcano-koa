@@ -1,12 +1,10 @@
 const { dataBase } = require("./db");
+const { security } = require("./security");
 
 module.exports = {
-  environment: "dev",
-  port: 3000,
-  dataBase,
-  security: {
-    secretKey: "abcdefg",
-    expiresIn: 60 * 60 * 24 * 30,
-  },
-  host: "http://localhost:3000/",
+    environment: "dev",
+    port: 3000,
+    dataBase,
+    security,
+    host: "http://localhost:3000/",
 };
